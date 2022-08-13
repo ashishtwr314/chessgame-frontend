@@ -7,7 +7,7 @@ import { useRef, useState } from "react";
 import Onboard from "./Onboard";
 
 function Game() {
-  const socket = io.connect("https://chessgame-backend.vercel.app");
+  const socket = io.connect("http://localhost:3001");
   const [fen, setFen] = useState("start");
   const [gameStarted, setGameStarted] = useState(false);
   let params = useParams();
