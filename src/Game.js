@@ -13,6 +13,7 @@ function Game() {
   let params = useParams();
   let loc = useLocation();
   const chessRef = useRef(new Chess());
+  /* eslint-disable no-unused-vars */
   const [playerColor, setPlayerColor] = useState(
     loc.state?.initiate ? "white" : "black"
   );
@@ -56,6 +57,7 @@ function Game() {
       chessRef.current.load(data);
       setFen(data);
     });
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [socket]);
 
   const handleDrop = (dropObj) => {
