@@ -80,27 +80,41 @@ function Game() {
         gameStarted ? (
           <>
             {chessRef.current.in_checkmate() && <h1>CheckMate</h1>}
-            <Chessboard
-              onDrop={(dropObj) => handleDrop(dropObj)}
-              position={fen}
-              orientation={playerColor}
-            />
+            <div className="chessboard">
+              <Chessboard
+                calcWidth={(e) => {
+                  return e.screenWidth > 1000
+                    ? e.screenWidth / 1.8
+                    : e.screenWidth / 1.3;
+                }}
+                onDrop={(dropObj) => handleDrop(dropObj)}
+                position={fen}
+                orientation={playerColor}
+              />
+            </div>
             <div>
               Turn: {chessRef.current.turn() === "w" ? "White" : "Black"}
             </div>
           </>
         ) : (
-          <h1>WAit</h1>
+          <WaitingScreen />
         )
       ) : gameStarted ? (
         <>
           {chessRef.current.in_checkmate() && <h1>CheckMate</h1>}
-          <Chessboard
-            onDrop={(dropObj) => handleDrop(dropObj)}
-            position={fen}
-            orientation={playerColor}
-          />
-          <div>Turn: {chessRef.current.turn() === "w" ? "White" : "Black"}</div>
+          <div className="chessboard">
+            <Chessboard
+              calcWidth={(e) => {
+                return e.screenWidth > 1000
+                  ? e.screenWidth / 1.8
+                  : e.screenWidth / 1.3;
+              }}
+              onDrop={(dropObj) => handleDrop(dropObj)}
+              position={fen}
+              orientation={playerColor}
+            />
+          </div>
+          <Turn turn={chessRef.current.turn()} />
         </>
       ) : (
         <Onboard setGameStarted={setGameStarted} initiate={false} />
@@ -109,10 +123,61 @@ function Game() {
   );
 }
 
-// const ChessGame = ({ handleDrop, fen, playerColor, chessRef }) => {
-//   return (
+const WaitingScreen = () => {
+  function copy() {
+    const el = document.createElement("input");
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  }
 
-//   );
-// };
+  return (
+    <div className="waiting-screen">
+      <div>
+        <h1>Waiting for the other player to join</h1>
+
+        <div className="link-info">
+          <input
+            className="input-field link"
+            disabled
+            value={window.location.href}
+          />
+          <button onClick={copy} className="start-btn copy-btn">
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="fancy-showoff-text">
+          Made with love{" "}
+          <span style={{ display: "inline-block", marginBottom: "-10px" }}>
+            ❣️
+          </span>{" "}
+          and Javascript By{" "}
+          <a href="https://www.linkedin.com/in/ashishtwr314/">Ashish Tiwari</a>
+        </h3>
+      </div>
+    </div>
+  );
+};
+
+const Turn = ({ turn }) => {
+  if (turn === "w") {
+    return (
+      <div className="turn">
+        <span> Turn:</span> <span className="turn-color white"></span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="turn">
+        Turn: <span className="turn-color black">White</span>
+      </div>
+    );
+  }
+};
 
 export default Game;

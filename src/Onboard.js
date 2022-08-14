@@ -20,15 +20,24 @@ function Onboard(props) {
     }
   };
   return (
-    <>
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        type="text"
-        placeholder="Enter Username"
-        className="border"
-      />
-      <button onClick={() => startGame()}>Start Game</button>
-    </>
+    <div className="onboard">
+      <div>
+        <div>
+          <input
+            className="input-field"
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder="Enter Username"
+          />
+        </div>
+
+        <div>
+          <button className="start-btn" onClick={() => startGame()}>
+            Start Game
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

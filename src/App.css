@@ -36,3 +36,92 @@
     transform: rotate(360deg);
   }
 }
+
+.chessboard {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.onboard {
+  height: 100vh;
+  background-image: linear-gradient(#ff9f4a, #ff3c83);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-field {
+  margin: 20px 0;
+  min-width: 200px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
+.start-btn {
+  background: none;
+  border: none;
+  background-color: #66ad47;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: 1px solid transparent;
+}
+.start-btn:hover {
+  color: #66ad47;
+  background-color: #fff;
+  border: 1px solid #66ad47;
+}
+.link-info {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+.input-field.link {
+  min-width: 300px !important;
+  border: 1px solid #4dd637;
+  border-radius: 0;
+  margin: 0px 0;
+}
+
+.start-btn.copy-btn {
+  border-radius: 0;
+}
+
+.waiting-screen > div:first-child {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+}
+
+.turn {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.turn-color {
+  display: block;
+  width: 50px;
+  border: 1px solid #000;
+  height: 50px;
+  margin-left: 20px;
+}
+
+.turn-color.white {
+  background-color: #fff;
+}
+
+.turn-color.black {
+  background-color: #000;
+}
