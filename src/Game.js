@@ -61,17 +61,27 @@ function Game() {
   }, [socket]);
 
   const handleDrop = (dropObj) => {
-    let move = chessRef.current.move({
-      from: dropObj.sourceSquare,
-      to: dropObj.targetSquare,
-    });
+    try {
+      let move = chessRef.current.move({
+        from: dropObj.sourceSquare,
+        to: dropObj.targetSquare,
+      });
 
-    if (move == null) return;
-    socket.emit("peice_move", {
-      room: params.gameId,
-      fen: chessRef.current.fen(),
-    });
-    setFen(chessRef.current.fen());
+      if (move == null) return;
+      if (playerColor == "white" && move.color == "b") return;
+      if (playerColor == "black" && move.color == "w") return;
+
+      // if (move.color == "w" && !loc.state?.initiate) return;
+      // if (move.color == "b" && loc.state?.initiate) return;
+
+      socket.emit("peice_move", {
+        room: params.gameId,
+        fen: chessRef.current.fen(),
+      });
+      setFen(chessRef.current.fen());
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
